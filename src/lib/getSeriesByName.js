@@ -1,5 +1,5 @@
 export default async function getMoviesByName(name) {
-  const token = import.meta.env.TMDB_TOKEN
+  const token = import.meta.env.PUBLIC_TMDB_TOKEN
   const options = {
     method: 'GET',
     headers: {

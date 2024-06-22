@@ -1,11 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import SeriesList from '../components/SeriesList.astro';
+import SeriesSearch from '../components/SeriesSearch.svelte';
 ---``
 
 <Layout title="Welcome to Astro.">
 	<main>
-		<SeriesList></SeriesList>
+		<!-- <SeriesList></SeriesList> -->
+		 <SeriesSearch client:load></SeriesSearch>
 	</main>
 </Layout>
 
