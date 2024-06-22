@@ -1,0 +1,19 @@
+---
+import getSeriesByName from '../lib/getSeriesByName.js'
+
+const results = await getSeriesByName('family guy')
+
+---
+
+{
+    results.map((result) => {
+        return (
+            <div>
+                <a href={`/series/${result.id}`}>
+                    <h1>{result.name}</h1>
+                </a>
+                <p>{result.overview}</p>
+            </div>
+        )
+    })
+}
