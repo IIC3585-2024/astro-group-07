@@ -1,0 +1,21 @@
+---
+import getSeriesInfo from "../../lib/getSeriesInfo"
+
+const { serieId } = Astro.params
+
+const series = await getSeriesInfo(serieId)
+---
+
+<div>
+    <img src={`https://image.tmdb.org/t/p/original/${series.poster_path}`} alt={series.name}>
+    <h1>{series.name}</h1>
+    <p>{series.overview}</p>
+</div>
+
+<style>
+    img {
+        width: 100%;
+        max-width: 300px;
+        height: auto;
+    }
+</style>
