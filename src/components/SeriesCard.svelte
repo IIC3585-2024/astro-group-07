@@ -1,33 +1,42 @@
 <script>
     export let name;
-    export let year;
     export let posterPath;
     export let id;
-
-    $: if (year) {
-        year = year.split('-')[0];
-    }
 </script>
 
 <li>
     <a href={`/series/${id}`}>
         <img src={`https://image.tmdb.org/t/p/w500${posterPath}`} alt={name} />
         <h3>{name}</h3>
-        <p>{year}</p>
     </a>
 </li>
 
 <style>
     li {
-        list-style: none;
+        list-style-type: none;
+        background-color: gray;
+        margin: 1rem;
+        width: 20rem;
+        padding: 2rem 0.5rem;
+        border-radius: 8px;
     }
     
     a {
         text-decoration: none;
         color: black;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
-    a:hover {
-        text-decoration: underline;
+
+    h3 {
+        margin: 0;
+        color: white;
+    }
+
+    img {
+        width: 12rem;
+        height: auto;
     }
 
 </style>

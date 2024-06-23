@@ -34,7 +34,6 @@
                 <SeriesCard
                     id={result.id}
                     name={result.name}
-                    year={result.first_air_date}
                     posterPath={result.poster_path}
                 />
             {:else if searchBy === 'review'}
