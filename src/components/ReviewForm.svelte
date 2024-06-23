@@ -14,8 +14,8 @@
             const review = {
                 seriesId: selectedSeries.id,
                 seriesName: selectedSeries.name,
-                stars: formData.get("stars"),
-                review: formData.get("review")
+                rating: formData.get("stars"),
+                content: formData.get("review")
             };
         } catch (error) {
             console.log(error)
