@@ -1,6 +1,7 @@
 <script>
     import SeriesCard from './SeriesCard.svelte';
     import getSeriesByName from '../lib/getSeriesByName.js';
+    import Review from './Review.svelte';
 
     let search = '';
     let results = [];
@@ -17,10 +18,25 @@
         })
     }
 
+    // TODO: Implement getReviewsByName to call the API
+    function getReviewsByName(name) {
+        return new Promise((resolve, reject) => {
+            resolve([{
+                username: 'Pedro',
+                seriesName: 'Breaking Bad',
+                rating: 10,
+                content: 'This is a great series!'
+            }])
+        })
+    }
+
     function getFunctionBySearchBy() {
         switch (searchBy) {
             case 'series':
                 return getSeriesByName;
+
+            case 'review':
+                return getReviewsByName;
             default:
                 return getSeriesByName;
         }
@@ -48,12 +64,9 @@
                     posterPath={result.poster_path}
                 />
             {:else if searchBy === 'review'}
-                <li>
-                    <a href={`/review/${result.id}`}>
-                        <h3>{result.title}</h3>
-                        <p>{result.content}</p>
-                    </a>
-                </li>
+                <Review
+                    review={result}
+                />
             {/if}
         {/each}
     </ul>

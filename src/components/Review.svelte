@@ -3,7 +3,7 @@
 </script>
 
 <li>
-    <h3>{review.username}</h3>
+    <h3>{review.username} - {review.seriesName}</h3>
     <p>{review.rating}</p>
     <p>{review.content}</p>
 </li>
