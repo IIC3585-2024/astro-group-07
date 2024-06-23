@@ -2,7 +2,6 @@
     export let name;
     export let year;
     export let posterPath;
-    export let id;
 
     $: if (year) {
         year = year.split('-')[0];
@@ -12,7 +11,7 @@
 <li>
     <img class="cover" src={`https://image.tmdb.org/t/p/original/${posterPath}`} alt={`${name} cover`} />
     <div class="series-info">
-        <h2><a href={`/series/${id}`}>{name} <span id="year">({year})</span></a></h2>
+        <h2>{name} <span id="year">({year})</span></h2>
     </div>
 </li>
 
@@ -32,14 +31,6 @@
     img {
         width: auto;
         height: 6rem;
-    }
-
-    a {
-        text-decoration: none;
-        color: black;
-    }
-    a:hover {
-        text-decoration: underline;
     }
 
     .series-info {

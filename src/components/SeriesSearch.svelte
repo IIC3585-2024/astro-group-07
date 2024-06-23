@@ -36,13 +36,13 @@
         <ul>
             {#each series as serie}
             <button on:click={() => selectSeries(serie)}>
-                    <SeriesResult 
-                        id={serie.id}
-                        name={serie.name} 
-                        year={serie.first_air_date} 
-                        posterPath={serie.poster_path} 
-                    />
-                </button>
+                <SeriesResult 
+                    id={serie.id}
+                    name={serie.name} 
+                    year={serie.first_air_date} 
+                    posterPath={serie.poster_path} 
+                />
+            </button>
             {/each}
         </ul>
     {/if}
