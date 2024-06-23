@@ -1,5 +1,6 @@
 <script>
     import getSeriesByName from '../lib/getSeriesByName'
+    import SeriesResult from './SeriesResult.svelte';
     
     let search = '';
     let series = [];
@@ -15,6 +16,8 @@
 
     $: if (search.length > 2) {
         searchSeries()
+    } else if (search.length === 0) {
+        series = []
     }
     
 </script>
@@ -23,7 +26,21 @@
     <input type="text" bind:value={search} placeholder="Search for a series" />
     <ul>
         {#each series as serie}
-            <li><a href={`/series/${serie.id}`}>{serie.name}</a></li>
+            <SeriesResult 
+                id={serie.id}
+                name={serie.name} 
+                year={serie.first_air_date} 
+                posterPath={serie.poster_path} 
+            />
         {/each}
     </ul>
 </div>
+
+<style>
+    ul {
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+</style>
