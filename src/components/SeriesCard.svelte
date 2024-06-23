@@ -16,8 +16,8 @@
         list-style-type: none;
         background-color: gray;
         margin: 1rem;
-        width: 20rem;
-        padding: 2rem 0.5rem;
+        width: 18rem;
+        padding: 2rem 0;
         border-radius: 8px;
     }
     

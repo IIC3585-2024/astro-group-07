@@ -39,7 +39,7 @@
         <option value="descending">Descending</option>
     </select>
     <button on:click={searchReviews}>Search</button>
-    <ul>
+    <ul class:series={searchBy === 'series'}>
         {#each results as result}
             {#if searchBy === 'series'}
                 <SeriesCard
@@ -58,3 +58,11 @@
         {/each}
     </ul>
 </div>
+
+<style>
+    .series {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+</style>
