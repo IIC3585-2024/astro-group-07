@@ -9,5 +9,5 @@ export default async function getMoviesByName(name) {
   }
   const response = await fetch(`https://api.themoviedb.org/3/search/tv?query=${name}&language=en-US`, options)
   const data = await response.json()
-  return data.results
+  return data.results.slice(0, 5)
 }
