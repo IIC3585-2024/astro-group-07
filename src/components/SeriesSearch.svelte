@@ -4,14 +4,19 @@
     
     let search = '';
     let series = [];
+    let areResultsVisible = false;
 
     function searchSeries() {
-        console.log(search);
         getSeriesByName(search).then((data) => {
             series = data  
         }).catch((error) => {
             console.log(error)
         })
+    }
+
+    function selectSeries(serie) {
+        search = serie.name
+        areResultsVisible = false
     }
 
     $: if (search.length > 2) {
@@ -22,19 +27,23 @@
     
 </script>
 
-<div>
-    <input type="text" bind:value={search} placeholder="Search for a series" />
-    <ul>
-        {#each series as serie}
-            <SeriesResult 
-                id={serie.id}
-                name={serie.name} 
-                year={serie.first_air_date} 
-                posterPath={serie.poster_path} 
-            />
-        {/each}
-    </ul>
-</div>
+<fieldset>
+    <input type="text" bind:value={search} placeholder="Search for a series" on:input={() => areResultsVisible = true} />
+    {#if areResultsVisible}
+        <ul>
+            {#each series as serie}
+            <button on:click={() => selectSeries(serie)}>
+                    <SeriesResult 
+                        id={serie.id}
+                        name={serie.name} 
+                        year={serie.first_air_date} 
+                        posterPath={serie.poster_path} 
+                    />
+                </button>
+            {/each}
+        </ul>
+    {/if}
+</fieldset>
 
 <style>
     ul {
@@ -42,5 +51,15 @@
         display: flex;
         flex-direction: column;
         gap: 1rem;
+    }
+    fieldset {
+        border: none;
+        padding: 0;
+    }
+    button {
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        padding: 0;
     }
 </style>
