@@ -1,6 +1,8 @@
 <script>
     import getSeriesByName from '../lib/getSeriesByName'
     import SeriesResult from './SeriesResult.svelte';
+
+    export let setSeries;
     
     let search = '';
     let series = [];
@@ -17,6 +19,7 @@
     function selectSeries(serie) {
         search = serie.name
         areResultsVisible = false
+        setSeries(serie)
     }
 
     $: if (search.length > 2) {

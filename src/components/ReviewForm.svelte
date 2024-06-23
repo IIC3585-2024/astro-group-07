@@ -1,20 +1,35 @@
 <script>
     import SeriesSearch from "./SeriesSearch.svelte";
 
+    let selectedSeries = null
+    
+    function setSeries(serie) {
+        selectedSeries = serie
+    }
+
     function submitForm(event) {
         event.preventDefault();
         const formData = new FormData(event.target);
-        const review = {
-            seriesId: 'Hola',
-            stars: formData.get("stars"),
-            review: formData.get("review")
-        };
+        try {
+            const review = {
+                seriesId: selectedSeries.id,
+                seriesName: selectedSeries.name,
+                stars: formData.get("stars"),
+                review: formData.get("review")
+            };
+        } catch (error) {
+            console.log(error)
+        }
+
+        // TODO: Send the review to the server
+
+        window.location.href = '/';
     }
     
 </script>
 
 <form on:submit={submitForm}>
-    <SeriesSearch />
+    <SeriesSearch setSeries={setSeries}/>
     <label for="stars">
         Rating
         <input id="stars" name="stars" type="number" min="1" max="10" />
