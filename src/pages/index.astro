@@ -11,7 +11,7 @@ const session = await getSession(Astro.request);
 		{
 			session ? (
 				<h1>Welcome back, <span class="text-gradient">{ session.user.name }</span>!</h1>
-				<a href="/add-recomendation">Add Recomendation</a>
+				<a href="/add-review">Add Review</a>
 				<SignOut class="sign-out">Log out</SignOut>
 			) : (
 				<h1>Welcome to Astro!</h1>
