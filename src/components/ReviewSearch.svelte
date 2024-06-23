@@ -5,6 +5,8 @@
     let search = '';
     let results = [];
     let searchBy = 'series';
+    let rating = null;
+    let order = 'ascending';
 
     function searchReviews() {
         const getFunction = getFunctionBySearchBy();
@@ -26,7 +28,16 @@
 </script>
 
 <div>
-    <input type="text" bind:value={search} placeholder="Search for a series" />
+    <input type="text" bind:value={search} placeholder={`Search for a ${searchBy}`} />
+    <select bind:value={searchBy}>
+        <option value="series">Title</option>
+        <option value="review">Review</option>
+    </select>
+    <input type="number" bind:value={rating} min="1" max="10" placeholder="Rating" />
+    <select bind:value={order}>
+        <option value="ascending">Ascending</option>
+        <option value="descending">Descending</option>
+    </select>
     <button on:click={searchReviews}>Search</button>
     <ul>
         {#each results as result}
