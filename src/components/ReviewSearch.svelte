@@ -12,6 +12,7 @@
     function searchReviews() {
         const getFunction = getFunctionBySearchBy();
         getFunction(search).then((data) => {
+            console.log(data)
             results = data
         }).catch((error) => {
             console.log(error)
@@ -62,6 +63,7 @@
                     id={result.id}
                     name={result.name}
                     posterPath={result.poster_path}
+                    genres={result.genre_names}
                 />
             {:else if searchBy === 'review'}
                 <Review
