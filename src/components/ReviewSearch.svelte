@@ -30,33 +30,33 @@
 
 <div>
     {#if searchBy === 'title'}
-        <input type="text" bind:value={searchText} placeholder={`Search for a ${searchBy}`} />
+        <input class="input-text-field margin-5" type="text" bind:value={searchText} placeholder={`Search for a ${searchBy}`} />
     {:else if searchBy === 'genre'}
-        <select bind:value={searchText}>
+        <select class="input-dropdown" bind:value={searchText}>
             <option value="" disabled selected>Select a genre</option>
             {#each genres as genre}
                 <option value={genre.name}>{genre.name}</option>
             {/each}
         </select>
     {:else if searchBy === 'service'}
-        <select bind:value={searchText}>
+        <select class="input-dropdown" bind:value={searchText}>
             <option value="" disabled selected>Select a provider</option>
             {#each providers as provider}
                 <option value={provider.provider_name}>{provider.provider_name}</option>
             {/each}
         </select>
     {/if}
-    <select bind:value={searchBy} on:input={() => searchText = ''}>
+    <select class="input-dropdown" bind:value={searchBy} on:input={() => searchText = ''}>
         <option value="title">Title</option>
         <option value="genre">Genre</option>
         <option value="service">Service</option>
     </select>
-    <input type="number" bind:value={rating} min="1" max="10" placeholder="Rating" />
-    <select bind:value={order}>
+    <input class="input-text-field margin-5" type="number" bind:value={rating} min="1" max="10" placeholder="Rating" />
+    <select class="input-dropdown" bind:value={order}>
         <option value="asc" selected>Ascending</option>
         <option value="desc">Descending</option>
     </select>
-    <button on:click={searchReviews}>Search</button>
+    <button class="btn" on:click={searchReviews}>Search</button>
     <ul class="series">
         {#each results as result}
             <SeriesCard

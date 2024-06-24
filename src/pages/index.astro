@@ -12,11 +12,10 @@ const session = await getSession(Astro.request);
 		{
 			session ? (
 				<h1>Welcome back, <span class="text-gradient">{ session.user.name }</span>!</h1>
-				<a href="/add-review">Add Review</a>
-				<SignOut class="sign-out">Log out</SignOut>
+				<h2>Search a Serie</h2>
 			) : (
 				<h1>Welcome to Astro!</h1>
-				<SignIn provider="github" class="sign-in">Log in</SignIn>
+				<h2>Search a Serie</h2>
 			)
 		}
 		<ReviewSearch client:load />
@@ -40,6 +39,10 @@ const session = await getSession(Astro.request);
 		text-align: center;
 		margin-bottom: 1em;
 	}
+	h2 {
+		margin-bottom: 0.5rem;
+	}
+
 	.text-gradient {
 		background-image: var(--accent-gradient);
 		-webkit-background-clip: text;
