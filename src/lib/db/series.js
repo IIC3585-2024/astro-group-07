@@ -8,7 +8,7 @@ export const addSeries = async (seriesId, title, rating, rating_count, genres, p
     const genreList = genres.split(", ");
 
     await addDoc(collection(db, "series"), {
-        seriesId: parseInt(id),
+        seriesId: parseInt(seriesId),
         title,
         rating: parseFloat(rating),
         rating_count: parseInt(rating_count),
@@ -76,7 +76,7 @@ export const addComment = async (id, comment, rating, username, email) => {
     const seriesData = querySnapshot.docs[0].data();
     const seriesRef = doc(seriesCollection, querySnapshot.docs[0].id);
     console.log(seriesData, seriesRef);
-    const newRating = (seriesData.rating * seriesData.rating_count + rating) / (seriesData.rating_count + 1);
+    const newRating = (parseInt(seriesData.rating) * parseInt(seriesData.rating_count) + parseInt(rating)) / (seriesData.rating_count + 1);
     const newRatingCount = seriesData.rating_count + 1;
     await updateDoc(seriesRef, {
         rating: newRating,
