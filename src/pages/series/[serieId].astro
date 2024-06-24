@@ -1,38 +1,174 @@
 ---
 import ReviewsList from "../../components/ReviewsList.svelte"
-import getSeriesInfo from "../../lib/getSeriesInfo"
+import { fetchSeries } from "../../lib/db/series"
 import getProvidersById from "../../lib/getProvidersById"
+import '../../styles/global.css';
 
 const { serieId } = Astro.params
 
-const series = await getSeriesInfo(serieId)
+const series = await fetchSeries(serieId)
 const providers = await getProvidersById(serieId)
 ---
 
-<div>
-    <img class="poster" src={`https://image.tmdb.org/t/p/original/${series.poster_path}`} alt={series.name}>
-    <h1>{series.name}</h1>
-    <p>{series.overview}</p>
-    <div>
-        {
-            providers.map(provider => (
-                <img class="provider-logo" src={`https://image.tmdb.org/t/p/original/${provider.logo_path}`} alt={provider.provider_name}>
-            ))
-        }
+<main>
+    <div class="serie-detail-container">
+        <div class="container">
+            <img class="cover" src={`https://image.tmdb.org/t/p/original/${series.poster_path}`} alt={series.name}>
+            <div>
+                <h1 class="title">{series.title}</h1>
+                <p>Genres: {series.genres.join(', ')}</p>
+
+                <div class="ratings-container">
+                    <ul class="ratings">
+                        <li class="rating-avg">
+                            <div>
+                                {Array.from({ length: Math.floor(series.rating) }).map((_, index) => (
+                                    <span class="star">&#9733;</span>
+                                ))}
+                                {Array.from({ length: 10 - Math.floor(series.rating) }).map((_, index) => (
+                                    <span class="star">&#9734;</span>
+                                ))}
+                            </div>
+                        <span class="average">{series.rating.toFixed(1)}</span>
+                        </li>
+                    </ul>
+                    <p>{series.rating_count} Ratings</p>
+                </div>
+
+                <div class="providers-section">
+                    <h4>Watch Providers</h4>
+                    <ul class="providers-list">
+                        {
+                            providers.map(provider => (
+                                <li class="provider-item">
+                                    <img class="providers-img" src={`https://image.tmdb.org/t/p/original/${provider.logo_path}`} alt={provider.provider_name}>
+                                </li>
+                            ))
+                        }
+                    </ul>
+                </div>
+                <p class="description">{series.description}</p>
+            </div>
+        </div>
+        <div class="comments-section">
+            <h2 class="title">Reviews</h2>
+            <div class="comments-container">
+                <ReviewsList serieId={serieId} client:load/>
+            </div>
+        </div>
     </div>
-    <h2>Reviews</h2>
-    <ReviewsList serieId={serieId} client:load/>
-</div>
+</main>
 
 <style>
-    .poster {
-        width: 100%;
-        max-width: 300px;
-        height: auto;
+    .container {
+    display: flex;
+    flex-direction: row;
     }
 
-    .provider-logo {
-        width: 3rem;
-        height: auto;
+    .title {
+        font-weight: bold;
+        margin-bottom: 1rem;
     }
+
+    .serie-detail-container {
+        width: 80%;
+        margin: 0 10%;
+    }
+
+    .cover {
+        max-height: 25rem;
+        width: auto;
+        margin-right: 3rem;
+        margin-top: 0.9rem;
+    }
+
+    .publish-year {
+        margin-top: 0.5rem;
+    }
+
+    .ratings-container, .providers-section {
+        margin-top: 1.5rem;
+        text-align: left;
+    }
+
+    .ratings, .providers-list {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: row;
+        align-items: end;
+        gap: 0.3rem;
+    }
+
+    .rating-avg {
+        display: flex;
+        flex-direction: row;
+        align-items: end;
+    }
+
+    .star {
+        font-size: 1.2em;
+    }
+
+    .average {
+        margin-left: 0.3rem;
+    }
+
+    .providers-img {
+        width: 2rem;
+        border-radius: 5%;
+    }
+
+    .description {
+        margin-top: 1rem;
+        font-size: 1.1em;
+        line-height: 1.5em;
+        text-align: justify;
+    }
+
+    .comments-section {
+        text-align: left;
+    }
+
+    .comment-form {
+        display: table-caption
+    }
+
+    .textarea {
+        width: 80vw;
+        min-height: 4rem;
+    }
+
+    .comments-container {
+        margin-top: 2rem;
+    }
+
+    .comment-item {
+        margin-bottom: 20px;
+        border-radius: 5px;
+        padding: 10px;
+        background-color: #2f2f2f;
+        color: rgb(235, 235, 235);
+    }
+
+    .comment-text {
+        margin-bottom: 8px;
+    }
+
+    .comment-meta {
+        display: flex;
+        justify-content: space-between;
+        color: #888;
+        margin-bottom: 0.5rem;
+    }
+
+    .comment-rating {
+        color: #f5c518;
+    }
+
+    .comment-by {
+        font-weight: 500;
+    }
+
 </style>

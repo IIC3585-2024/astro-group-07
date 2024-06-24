@@ -17,11 +17,9 @@
     })
 </script>
 
-<ul>
-    {#each reviews as review, index}
-        <Review 
-            review={review}
-            key={index}
-        />
-    {/each}
-</ul>
+{#each reviews as review, index}
+    <Review 
+        review={review}
+        key={index}
+    />
+{/each}

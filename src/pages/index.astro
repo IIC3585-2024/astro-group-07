@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import { getSession } from 'auth-astro/server';
 import { SignIn, SignOut } from 'auth-astro/components';
 import ReviewSearch from '../components/ReviewSearch.svelte';
+import '../styles/global.css';
 
 const session = await getSession(Astro.request);
 ---

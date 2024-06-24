@@ -1,5 +1,6 @@
 'use server'
 import { db } from "../firebase/config";
+import getSeriesInfo from "../getSeriesInfo" 
 import { collection, addDoc, getDocs, doc, updateDoc, query, where } from "firebase/firestore";
 
 export const addSeries = async (seriesId, title, rating, rating_count, genres, poster_path) => {
