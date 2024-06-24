@@ -26,7 +26,7 @@
             console.log(error)
         }
 
-        // window.location.href = '/';
+        window.location.href = '/';
     }
     
 </script>
