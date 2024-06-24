@@ -27,15 +27,16 @@ export const fetchSeries = async (id) => {
     const data = querySnapshot.docs.map(doc => doc.data());
     // search api for series by id
     const apiData = await getSeriesInfo(id);
+    const genreNames = apiData.genres.map((genre) => genre.name);
 
     if (data.length === 0) {
-        await addSeries(id, apiData.name, 0, 0, apiData.genre_names, apiData.poster_path);
+        await addSeries(id, apiData.name, 0, 0, genreNames.join(", "), apiData.poster_path);
         return {
             title: apiData.name,
             description: apiData.overview,
             rating: 0,
             rating_count: 0,
-            genres: apiData.genre_names,
+            genres: genreNames,
             poster_path: apiData.poster_path
         }
     }
@@ -63,7 +64,7 @@ export const addComment = async (id, comment, rating, username, email) => {
     await addDoc(collection(db, "comments"), {
         seriesId: parseInt(id),
         comment,
-        rating,
+        rating: parseInt(id),
         username,
         email
     });

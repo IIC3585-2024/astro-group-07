@@ -7,53 +7,39 @@
     const split_genres = genres.split(', ');
 
 </script>
-
-<li>
+<div class="series-card">
     <a href={`/series/${id}`}>
-        <img src={`https://image.tmdb.org/t/p/w500${posterPath}`} alt={name} />
-        <h3>{name}</h3>
+        <img class="cover" src={`https://image.tmdb.org/t/p/w500${posterPath}`} alt={name} />
+        <h3 class="margin-5">{name}</h3>
         <div>
             {#each split_genres as genre}
                 <p class="genre">{genre}</p>
             {/each}
         </div>
     </a>
-</li>
+</div>
 
 <style>
-    li {
-        list-style-type: none;
-        background-color: gray;
-        margin: 1rem;
-        width: 18rem;
-        padding: 2rem 0;
-        border-radius: 8px;
-    }
-    
-    a {
-        text-decoration: none;
-        color: black;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+    .series-card {
+    background-color: #2f2f2f;
+    border-radius: 5px;
+    color: #fff;
+    padding: 10px;
+    margin: 10px;
+    width: 16rem;
+    text-align: center;
+    text-wrap: wrap;
+    height: auto;
+}
 
-    h3 {
-        margin: 0;
-        color: white;
-    }
+.series-card:hover {
+    cursor: pointer;
+}
 
-    img {
-        width: 12rem;
-        height: auto;
-    }
-
-    .genre {
-        background-color: #333333b1;
-        color: white;
-        padding: 0 0.5rem;
-        border-radius: 5px;
-        text-align: center;
-    }
+.cover {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
 
 </style>
