@@ -8,10 +8,10 @@ export const addSeries = async (seriesId, title, rating, rating_count, genres, p
     const genreList = genres.split(", ");
 
     await addDoc(collection(db, "series"), {
-        seriesId,
+        seriesId: parseInt(id),
         title,
-        rating,
-        rating_count,
+        rating: parseFloat(rating),
+        rating_count: parseInt(rating_count),
         genres: genreList,
         poster_path
     });
@@ -64,7 +64,7 @@ export const addComment = async (id, comment, rating, username, email) => {
     await addDoc(collection(db, "comments"), {
         seriesId: parseInt(id),
         comment,
-        rating: parseInt(id),
+        rating: parseFloat(rating),
         username,
         email
     });
