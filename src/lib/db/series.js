@@ -48,6 +48,7 @@ export const fetchSeries = async (id) => {
         poster_path: data[0].poster_path
     }
 }
+
 export const fetchComments = async (id) => {
     // fetch comments by seriesId
     const commentsCollection = collection(db, "comments");

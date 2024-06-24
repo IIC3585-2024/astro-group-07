@@ -1,5 +1,9 @@
 <script>
     import SeriesSearch from "./SeriesSearch.svelte";
+    import { addComment } from "../lib/db/series.js"
+
+    export let username
+    export let email 
 
     let selectedSeries = null
     
@@ -11,19 +15,18 @@
         event.preventDefault();
         const formData = new FormData(event.target);
         try {
-            const review = {
-                seriesId: selectedSeries.id,
-                seriesName: selectedSeries.name,
-                rating: formData.get("stars"),
-                content: formData.get("review")
-            };
+            addComment(
+                selectedSeries.id,
+                formData.get("review"),
+                formData.get("stars"),
+                username,
+                email
+            );
         } catch (error) {
             console.log(error)
         }
 
-        // TODO: Send the review to the server
-
-        window.location.href = '/';
+        // window.location.href = '/';
     }
     
 </script>
