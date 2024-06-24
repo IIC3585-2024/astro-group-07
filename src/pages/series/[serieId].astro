@@ -1,24 +1,38 @@
 ---
 import ReviewsList from "../../components/ReviewsList.svelte"
 import getSeriesInfo from "../../lib/getSeriesInfo"
+import getProviders from "../../lib/getProviders"
 
 const { serieId } = Astro.params
 
 const series = await getSeriesInfo(serieId)
+const providers = await getProviders(serieId)
 ---
 
 <div>
-    <img src={`https://image.tmdb.org/t/p/original/${series.poster_path}`} alt={series.name}>
+    <img class="poster" src={`https://image.tmdb.org/t/p/original/${series.poster_path}`} alt={series.name}>
     <h1>{series.name}</h1>
     <p>{series.overview}</p>
+    <div>
+        {
+            providers.map(provider => (
+                <img class="provider-logo" src={`https://image.tmdb.org/t/p/original/${provider.logo_path}`} alt={provider.provider_name}>
+            ))
+        }
+    </div>
     <h2>Reviews</h2>
     <ReviewsList serieId={serieId} client:load/>
 </div>
 
 <style>
-    img {
+    .poster {
         width: 100%;
         max-width: 300px;
+        height: auto;
+    }
+
+    .provider-logo {
+        width: 3rem;
         height: auto;
     }
 </style>
