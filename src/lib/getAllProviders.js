@@ -10,5 +10,5 @@ export default async function getAllProviders() {
   };
   const response = await fetch(url, options);
   const data = await response.json();
-  return data.results.CL.flatrate;
+  return data.results;
 }

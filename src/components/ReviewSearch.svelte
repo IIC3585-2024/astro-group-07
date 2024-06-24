@@ -3,6 +3,7 @@
     import SeriesCard from './SeriesCard.svelte';
     import { search } from '../lib/db/search.js';
     import getGenres from '../lib/getGenres.js';
+    import getAllProviders from '../lib/getAllProviders.js';
 
     let searchText = '';
     let results = [];
@@ -10,6 +11,7 @@
     let rating = '';
     let order = 'asc';
     let genres = [];
+    let providers = [];
 
     function searchReviews() {
         search(searchText, searchBy, rating, order).then((data) => {
@@ -22,6 +24,7 @@
 
     onMount(async () => {
         genres = await getGenres();
+        providers = await getAllProviders();
     });
 </script>
 
@@ -37,8 +40,10 @@
         </select>
     {:else if searchBy === 'service'}
         <select bind:value={searchText}>
-            <!-- TODO: Add services -->
-            <option value="netflix">Netflix</option>
+            <option value="" disabled selected>Select a provider</option>
+            {#each providers as provider}
+                <option value={provider.provider_name}>{provider.provider_name}</option>
+            {/each}
         </select>
     {/if}
     <select bind:value={searchBy} on:input={() => searchText = ''}>
