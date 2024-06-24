@@ -4,7 +4,7 @@ import getSeriesByGenre from "../getSeriesByGenre";
 
 import { db } from "../firebase/config";
 import { collection, getDocs, query, where, orderBy } from "firebase/firestore";
-import getGenres from "../api/getGenres";
+import getGenres from "../getGenres";
 
 export const search = async (text, queryField, rating, order) => {
     console.log(text, queryField, rating, order);
