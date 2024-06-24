@@ -12,7 +12,7 @@ const series = await getSeriesInfo(serieId)
     <h1>{series.name}</h1>
     <p>{series.overview}</p>
     <h2>Reviews</h2>
-    <ReviewsList serieId={serieId} />
+    <ReviewsList serieId={serieId} client:load/>
 </div>
 
 <style>
