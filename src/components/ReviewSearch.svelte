@@ -1,73 +1,70 @@
 <script>
+    import { onMount } from 'svelte';
     import SeriesCard from './SeriesCard.svelte';
-    import getSeriesByName from '../lib/getSeriesByName.js';
-    import Review from './Review.svelte';
+    import { search } from '../lib/db/search.js';
+    import getGenres from '../lib/getGenres.js';
+    import getAllProviders from '../lib/getAllProviders.js';
 
-    let search = '';
+    let searchText = '';
     let results = [];
-    let searchBy = 'series';
-    let rating = null;
-    let order = 'ascending';
+    let searchBy = 'title';
+    let rating = '';
+    let order = 'asc';
+    let genres = [];
+    let providers = [];
 
     function searchReviews() {
-        const getFunction = getFunctionBySearchBy();
-        getFunction(search).then((data) => {
-            results = data
+        search(searchText, searchBy, rating, order).then((data) => {
+            results = data;
+            console.log(results);
         }).catch((error) => {
-            console.log(error)
-        })
+            console.error(error);
+        });
     }
 
-    // TODO: Implement getReviewsByName to call the API
-    function getReviewsByName(name) {
-        return new Promise((resolve, reject) => {
-            resolve([{
-                username: 'Pedro',
-                seriesName: 'Breaking Bad',
-                rating: 10,
-                content: 'This is a great series!'
-            }])
-        })
-    }
-
-    function getFunctionBySearchBy() {
-        switch (searchBy) {
-            case 'series':
-                return getSeriesByName;
-
-            case 'review':
-                return getReviewsByName;
-            default:
-                return getSeriesByName;
-        }
-    }
+    onMount(async () => {
+        genres = await getGenres();
+        providers = await getAllProviders();
+    });
 </script>
 
 <div>
-    <input type="text" bind:value={search} placeholder={`Search for a ${searchBy}`} />
-    <select bind:value={searchBy}>
-        <option value="series">Title</option>
-        <option value="review">Review</option>
+    {#if searchBy === 'title'}
+        <input type="text" bind:value={searchText} placeholder={`Search for a ${searchBy}`} />
+    {:else if searchBy === 'genre'}
+        <select bind:value={searchText}>
+            <option value="" disabled selected>Select a genre</option>
+            {#each genres as genre}
+                <option value={genre.name}>{genre.name}</option>
+            {/each}
+        </select>
+    {:else if searchBy === 'service'}
+        <select bind:value={searchText}>
+            <option value="" disabled selected>Select a provider</option>
+            {#each providers as provider}
+                <option value={provider.provider_name}>{provider.provider_name}</option>
+            {/each}
+        </select>
+    {/if}
+    <select bind:value={searchBy} on:input={() => searchText = ''}>
+        <option value="title">Title</option>
+        <option value="genre">Genre</option>
+        <option value="service">Service</option>
     </select>
     <input type="number" bind:value={rating} min="1" max="10" placeholder="Rating" />
     <select bind:value={order}>
-        <option value="ascending">Ascending</option>
-        <option value="descending">Descending</option>
+        <option value="asc" selected>Ascending</option>
+        <option value="desc">Descending</option>
     </select>
     <button on:click={searchReviews}>Search</button>
-    <ul class:series={searchBy === 'series'}>
+    <ul class="series">
         {#each results as result}
-            {#if searchBy === 'series'}
-                <SeriesCard
-                    id={result.id}
-                    name={result.name}
-                    posterPath={result.poster_path}
-                />
-            {:else if searchBy === 'review'}
-                <Review
-                    review={result}
-                />
-            {/if}
+            <SeriesCard
+                id={result.id}
+                name={result.title}
+                posterPath={result.poster_path}
+                genres={result.genres}
+            />
         {/each}
     </ul>
 </div>

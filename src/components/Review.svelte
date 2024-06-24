@@ -3,9 +3,9 @@
 </script>
 
 <li>
-    <h3>{review.username} - {review.seriesName}</h3>
-    <p>{review.rating}</p>
-    <p>{review.content}</p>
+    <h3>{review.username}</h3>
+    <p>Rating: {review.rating}</p>
+    <p>{review.comment}</p>
 </li>
 
 <style>

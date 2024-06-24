@@ -1,14 +1,19 @@
 <script>
     import { onMount } from 'svelte';
     import Review from './Review.svelte';
+    import { fetchComments } from '../lib/db/series';
 
     export let serieId
 
     let reviews = []
 
     onMount(() => {
-        console.log(serieId)
-        // TODO: fetch reviews for the serieId
+        fetchComments(serieId).then((data) => {
+            reviews = data
+            console.log(reviews)
+        }).catch((error) => {
+            console.error(error)
+        })
     })
 </script>
 

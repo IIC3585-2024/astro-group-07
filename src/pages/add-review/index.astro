@@ -1,7 +1,10 @@
 ---
 import ReviewForm from "../../components/ReviewForm.svelte";
+import { getSession } from 'auth-astro/server';
+
+const session = await getSession(Astro.request);
 ---
 
 <div class="container">
-  <ReviewForm client:load />
+  <ReviewForm username={session.user.name} email={session.user.email} client:load />
 </div>
