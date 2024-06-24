@@ -31,7 +31,7 @@
 </script>
 
 <fieldset>
-    <input type="text" bind:value={search} placeholder="Search for a series" on:input={() => areResultsVisible = true} />
+    <input class="input-text-field" type="text" bind:value={search} placeholder="Search for a series" on:input={() => areResultsVisible = true} />
     {#if areResultsVisible}
         <ul>
             {#each series as serie}

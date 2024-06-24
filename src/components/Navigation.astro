@@ -1,0 +1,72 @@
+---
+import { getSession } from 'auth-astro/server';
+import { SignIn, SignOut } from 'auth-astro/components';
+
+const session = await getSession(Astro.request);
+---
+{
+    session ? (
+    <div class ="navbar">
+        <div class="navtabs">
+            <a href="/" class="navtab">Home</a>
+            <a href="/add-review" class="navtab">Add Review</a>
+            <SignOut class="btn sign-out">Log out</SignOut>
+        </div>
+    </div>
+    ) : (
+    <div class ="navbar">
+        <div class="navtabs">
+            <a href="/" class="navtab">Home</a>
+            <SignIn provider="github" class="btn sign-in">Log in</SignIn>
+        </div>
+    </div>
+    )
+}
+
+
+
+<style>
+    .brand {
+        line-height: normal;
+        margin-right: auto;
+    }
+
+    .navbar {
+        z-index: 98;
+        position: fixed;
+        top: 0;
+        left: 10%;
+        width: 80%;
+        height: 100px;
+    }
+
+    .navtabs {
+        display: flex;
+        justify-content: space-evenly;
+        margin-top: 20px;
+        background: #202020;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        padding: 10px 20px;
+        position: relative;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .navtab {
+        margin: 0 20px;
+        padding: 10px 20px;
+        cursor: pointer;
+        color: #fff;
+        transition: color 0.3s;
+    }
+
+    .navtab:hover {
+        color: hsla(160, 100%, 37%, 1);
+    }
+
+    .navtab.active {
+        color: hsla(160, 100%, 37%, 1);
+        font-weight: 600;
+    }
+</style>
