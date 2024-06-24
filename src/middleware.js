@@ -1,3 +1,4 @@
+
 export function onRequest(context, next) {
 
   const sessionToken = context.cookies.get('authjs.session-token');
@@ -8,4 +9,3 @@ export function onRequest(context, next) {
   }
   
   return next();
-}
