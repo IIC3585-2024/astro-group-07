@@ -1,12 +1,12 @@
 ---
 import ReviewsList from "../../components/ReviewsList.svelte"
 import getSeriesInfo from "../../lib/getSeriesInfo"
-import getProviders from "../../lib/getProviders"
+import getProvidersById from "../../lib/getProvidersById"
 
 const { serieId } = Astro.params
 
 const series = await getSeriesInfo(serieId)
-const providers = await getProviders(serieId)
+const providers = await getProvidersById(serieId)
 ---
 
 <div>

@@ -1,5 +1,5 @@
-export default async function getProviders(id) {
-  const url = `https://api.themoviedb.org/3/tv/${id}/watch/providers`;
+export default async function getAllProviders() {
+  const url = `https://api.themoviedb.org/3/watch/providers/tv?language=en-US&watch_region=CL`;
   const token = import.meta.env.PUBLIC_TMDB_TOKEN
   const options = {
       method: 'GET', 
