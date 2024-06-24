@@ -32,7 +32,7 @@
         <option value="desc">Descending</option>
     </select>
     <button on:click={searchReviews}>Search</button>
-    <ul class:series={searchBy === 'title'}>
+    <ul class="series">
         {#each results as result}
             <SeriesCard
                 id={result.id}

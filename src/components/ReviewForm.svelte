@@ -21,12 +21,13 @@
                 formData.get("stars"),
                 username,
                 email
-            );
+            ).then(() => {
+                window.location.href = '/';
+            })
         } catch (error) {
             console.log(error)
         }
 
-        window.location.href = '/';
     }
     
 </script>
