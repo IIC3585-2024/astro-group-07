@@ -1,4 +1,3 @@
-'use server'
 import { db } from "../firebase/config";
 import getSeriesInfo from "../getSeriesInfo" 
 import { collection, addDoc, getDocs, doc, updateDoc, query, where } from "firebase/firestore";

@@ -1,4 +1,3 @@
-'use server';
 import getSeriesByName from "../getSeriesByName";
 import getSeriesByGenre from "../getSeriesByGenre";
 
