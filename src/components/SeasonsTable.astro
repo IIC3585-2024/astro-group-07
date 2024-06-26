@@ -1,0 +1,31 @@
+---
+interface Season {
+    season_number: number;
+    name: string;
+    episode_count: number;
+    air_date: string;
+}
+
+const { seasons } = Astro.props;
+---
+
+<table>
+    <thead>
+        <tr>
+            <th>Season</th>
+            <th>Name</th>
+            <th>Episodes</th>
+            <th>Release Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {seasons.map((season: Season) => (
+            <tr>
+                <td>{season.season_number}</td>
+                <td>{season.name}</td>
+                <td>{season.episode_count}</td>
+                <td>{season.air_date}</td>
+            </tr>
+        ))}
+    </tbody>
+</table>
