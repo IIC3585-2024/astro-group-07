@@ -9,7 +9,11 @@
 </script>
 <div class="series-card">
     <a href={`/series/${id}`}>
-        <img class="cover" src={`https://image.tmdb.org/t/p/w500${posterPath}`} alt={name} />
+        {#if posterPath}
+            <img class="cover" src={`https://image.tmdb.org/t/p/w500${posterPath}`} alt={name} />
+        {:else}
+            <h4 class="cover missing-cover">Cover Not Found</h4>
+        {/if}
         <h3 class="margin-5">{name}</h3>
         <div>
             {#each split_genres as genre}
@@ -40,6 +44,13 @@
     width: 100%;
     height: auto;
     object-fit: cover;
+}
+
+.missing-cover {
+    background-color: #131313;
+    height: 22rem;
+    align-content: center;
+    color: #ffffff6d;
 }
 
 </style>
