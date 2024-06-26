@@ -40,7 +40,7 @@
         <SeriesSearch setSeries={setSeries}/>
         <label for="stars">
             Rating
-            <input class="input-text-field" id="stars" name="stars" type="number" min="1" max="10" />
+            <input class="input-text-field" id="stars" name="stars" type="number" min="1" max="10"/>
         </label>
         <textarea class="input-text-field textarea" id="review" name="review" placeholder="What are your thoughts about the series?"></textarea>
         <button class="btn" type="submit">Submit</button>
@@ -50,7 +50,7 @@
     main {
         width: 80vw;
         margin: 0 10vw;
-        margin-top: 80px;
+        margin-top: 120px;
     }
 
     h1 {
@@ -69,10 +69,28 @@
 
     label {
         font-weight: bold;
+        font-size: 1.5rem;
+    }
+
+    .input-text-field {
+        height: 3rem;
+        width: 4rem;
+        font-size: 1.5rem;
     }
 
     .textarea {
         width: 80vw;
-        min-height: 4rem;
+        min-height: 16rem;
+        font-size: 1.2rem;
+    }
+
+    button {
+        height: 4rem;
+        font-size: 1.5em;
+        cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+
     }
 </style>
