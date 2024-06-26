@@ -7,6 +7,12 @@ import Header from '../../components/Header.astro';
 import SeasonsTable from "../../components/SeasonsTable.astro";
 import getSeriesInfo from "../../lib/getSeriesInfo";
 
+interface Provider {
+    provider_id: number;
+    provider_name: string;
+    logo_path: string;
+}
+
 const { serieId } = Astro.params
 
 const series = await fetchSeries(serieId)
@@ -44,7 +50,7 @@ const seasons = seriesFromTMDB.seasons
                     <h4>Watch Providers</h4>
                     <ul class="providers-list">
                         {
-                            providers.map(provider => (
+                            providers.map((provider: Provider) => (
                                 <li class="provider-item">
                                     <img class="providers-img" src={`https://image.tmdb.org/t/p/original/${provider.logo_path}`} alt={provider.provider_name}>
                                 </li>
