@@ -20,6 +20,5 @@
 {#each reviews as review, index}
     <Review 
         review={review}
-        key={index}
     />
 {/each}
