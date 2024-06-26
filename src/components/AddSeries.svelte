@@ -6,7 +6,6 @@
 
     function submitForm(event) {
         event.preventDefault();
-        console.log(selectedSeries)
         addSeries(
             selectedSeries.id,
             selectedSeries.name,

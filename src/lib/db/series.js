@@ -1,13 +1,14 @@
 import { db } from "../firebase/config";
 import getSeriesInfo from "../getSeriesInfo" 
 import { collection, addDoc, getDocs, doc, updateDoc, query, where } from "firebase/firestore";
+import getProvidersById from "../getProvidersById";
 
 export const addSeries = async (seriesId, title, rating, rating_count, genres, poster_path) => {
     // separate genres to array
     const genreList = genres.split(", ");
 
     // search for providers by seriesId in API
-    let providers = await getProvidersById(seriesId);
+    let providers = await getProvidersById(parseInt(seriesId));
 
     if (providers === null) {
         providers = [];
@@ -29,7 +30,6 @@ export const addSeries = async (seriesId, title, rating, rating_count, genres, p
 
 export const fetchSeries = async (id) => {
     // fetch series by seriesId
-    console.log(id);
     const seriesCollection = collection(db, "series");
     const q = query(seriesCollection, where("seriesId", "==", parseInt(id)));
     const querySnapshot = await getDocs(q);
@@ -84,7 +84,6 @@ export const addComment = async (id, comment, rating, username, email) => {
     const querySnapshot = await getDocs(q);
     const seriesData = querySnapshot.docs[0].data();
     const seriesRef = doc(seriesCollection, querySnapshot.docs[0].id);
-    console.log(seriesData, seriesRef);
     const newRating = (parseInt(seriesData.rating) * parseInt(seriesData.rating_count) + parseInt(rating)) / (seriesData.rating_count + 1);
     const newRatingCount = seriesData.rating_count + 1;
     await updateDoc(seriesRef, {
