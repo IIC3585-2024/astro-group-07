@@ -25,7 +25,7 @@
     }
 
     li:hover {
-        background-color: #f0f0f0;
+        background-color: #2f2f2f5e;
     }
 
     img {
