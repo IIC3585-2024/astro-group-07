@@ -10,7 +10,6 @@
     onMount(() => {
         fetchComments(serieId).then((data) => {
             reviews = data
-            console.log(reviews)
         }).catch((error) => {
             console.error(error)
         })
