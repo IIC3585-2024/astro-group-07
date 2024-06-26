@@ -16,7 +16,6 @@
     function searchReviews() {
         search(searchText, searchBy, rating, order).then((data) => {
             results = data;
-            console.log(results);
         }).catch((error) => {
             console.error(error);
         });

@@ -6,7 +6,6 @@ import { collection, getDocs, query, where, orderBy } from "firebase/firestore";
 import getGenres from "../getGenres";
 
 export const search = async (text, queryField, rating, order) => {
-    console.log(text, queryField, rating, order);
 
     if (!text && !rating && !order) {
         return [];
@@ -83,7 +82,6 @@ export const search = async (text, queryField, rating, order) => {
         if (order) {
             if (order === "asc") {
                 const sortedData = joinedData.sort((a, b) => a.rating - b.rating);
-                console.log(joinedData);
                 return sortedData;
             } else {
                 const sortedData = joinedData.sort((a, b) => b.rating - a.rating);
@@ -105,7 +103,6 @@ export const search = async (text, queryField, rating, order) => {
         }
         const querySnapshot = await getDocs(q);
         const data = querySnapshot.docs.map(doc => doc.data());
-        console.log(data);
         return data;
     }
     return [];
