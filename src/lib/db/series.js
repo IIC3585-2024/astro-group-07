@@ -8,6 +8,11 @@ export const addSeries = async (seriesId, title, rating, rating_count, genres, p
 
     // search for providers by seriesId in API
     let providers = await getProvidersById(seriesId);
+
+    if (providers === null) {
+        providers = [];
+    }
+
     providers = providers.map(provider => provider.provider_name);
 
     await addDoc(collection(db, "series"), {
