@@ -22,6 +22,12 @@
         });
     }
 
+    function handleEnterSearch(event) {
+        if (event.key === 'Enter') {
+            searchReviews();
+        }
+    }
+
     onMount(async () => {
         genres = await getGenres();
         providers = await getAllProviders();
@@ -30,7 +36,12 @@
 
 <div>
     {#if searchBy === 'title'}
-        <input class="input-text-field margin-5" type="text" bind:value={searchText} placeholder={`Search for a ${searchBy}`} />
+        <input 
+            class="input-text-field margin-5" 
+            type="text" bind:value={searchText} 
+            placeholder={`Search for a ${searchBy}`}
+            on:keydown={handleEnterSearch} 
+        />
     {:else if searchBy === 'genre'}
         <select class="input-dropdown" bind:value={searchText}>
             <option value="" disabled selected>Select a genre</option>
